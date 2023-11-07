@@ -16,15 +16,18 @@ const getBase64 = (file: RcFile): Promise<string> =>
 
 interface UploadImageInterface {
   onChangeImage: any;
+  fileList: any;
+  onChangeFunction: any;
+  onRemoveImage: any;
 }
 
 const UploadImage = (props: UploadImageInterface) => {
-  const { onChangeImage } = props;
+  const { fileList, onChangeImage, onChangeFunction, onRemoveImage } = props;
 
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  // const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const handleCancel = () => setPreviewOpen(false);
 
@@ -47,7 +50,8 @@ const UploadImage = (props: UploadImageInterface) => {
       const newlyUploadedImageUrl = newlyUploadedFile.url;
     }
 
-    setFileList(newFileList);
+    // setFileList(newFileList);
+    onChangeFunction(newFileList);
   };
   const uploadButton = (
     <div>
@@ -57,7 +61,6 @@ const UploadImage = (props: UploadImageInterface) => {
   );
 
   const customRequest = async ({ file, onSuccess, onError }: any) => {
-    console.log("file", file);
     try {
       setTimeout(() => {
         onChangeImage(file.path);
@@ -74,6 +77,10 @@ const UploadImage = (props: UploadImageInterface) => {
     height: "500px", // Set the height as desired
   };
 
+  const handleOnRemove = () => {
+    onRemoveImage();
+  };
+
   return (
     <div>
       <Upload
@@ -83,6 +90,7 @@ const UploadImage = (props: UploadImageInterface) => {
         onPreview={handlePreview}
         onChange={handleChange}
         className="custom-upload"
+        onRemove={handleOnRemove}
       >
         {fileList.length >= 1 ? null : uploadButton}
       </Upload>

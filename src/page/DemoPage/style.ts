@@ -1,11 +1,22 @@
 import styled from "styled-components";
 
 const DemoPageWrapper = styled.div`
+  .header {
+    border: 1px solid #b4aeae;
+
+    display: flex;
+    align-items: center;
+
+    img {
+      height: 100px;
+      width: 100px;
+    }
+  }
+
   .title {
     font-size: 24px;
 
     height: 120%;
-    background: #f2f2f2;
     border-bottom: #b4aeae;
   }
 

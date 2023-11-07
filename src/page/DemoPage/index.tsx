@@ -41,21 +41,28 @@ const DemoPage = () => {
 
   //note::
   const processImageResult = () => {
-    setLoading(true);
-    setIsAnimating(true);
+    if (virtualTryon?.userImagePath && virtualTryon?.userTryonImagePath) {
+      setLoading(true);
+      setIsAnimating(true);
 
-    setTimeout(() => {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+        messageApi.open({
+          type: "success",
+          content: "Try on successfully!",
+        });
+
+        const imageNamePath = virtualTryon?.userImagePath?.split("/").pop();
+        const imageName = imageNamePath.split(".")[0];
+
+        return dispatch(setResultImagePath(imageName + ".png"));
+      }, randomNumber * 1000);
+    } else {
       messageApi.open({
-        type: "success",
-        content: "Try on successfully!",
+        type: "error",
+        content: "Upload image to try",
       });
-
-      const imageNamePath = virtualTryon?.userImagePath?.split("/").pop();
-      const imageName = imageNamePath.split(".")[0];
-
-      return dispatch(setResultImagePath(imageName + ".png"));
-    }, randomNumber * 1000);
+    }
   };
 
   useEffect(() => {
@@ -93,7 +100,11 @@ const DemoPage = () => {
   return (
     <DemoPageWrapper>
       {contextHolder}
-      <h1 className="title">Vitural Fit Tryon</h1>
+
+      <div className="header">
+        <img src="/logo.png" alt="" />
+        <h1 className="title">VirtualFit</h1>
+      </div>
 
       <div className="wrapper">
         <div className="user-image wrapper-item">
@@ -105,7 +116,7 @@ const DemoPage = () => {
             />
           )}
 
-          <div className="upload-text">Upload your image here!</div>
+          <div className="upload-text">Upload your image</div>
           <UploadImage onChangeImage={userUploadImageChange} />
         </div>
 
@@ -116,7 +127,7 @@ const DemoPage = () => {
 
               <img
                 src={virtualTryon?.resultImagePath}
-                alt="hehe"
+                alt="image result"
                 className="preview-image"
               />
             </>
@@ -143,9 +154,7 @@ const DemoPage = () => {
             />
           )}
 
-          <div className="upload-text">
-            Upload your image you want try here!
-          </div>
+          <div className="upload-text">Upload your image you want try</div>
           <UploadImage onChangeImage={userTryonImageChange} />
         </div>
       </div>

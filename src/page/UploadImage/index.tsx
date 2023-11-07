@@ -50,7 +50,6 @@ const UploadImage = (props: UploadImageInterface) => {
       const newlyUploadedImageUrl = newlyUploadedFile.url;
     }
 
-    // setFileList(newFileList);
     onChangeFunction(newFileList);
   };
   const uploadButton = (
@@ -63,7 +62,7 @@ const UploadImage = (props: UploadImageInterface) => {
   const customRequest = async ({ file, onSuccess, onError }: any) => {
     try {
       setTimeout(() => {
-        onChangeImage(file.path);
+        onChangeImage(file.name);
         onSuccess();
       }, 1000); // Simulate a delay (1 second) as if it's uploading
     } catch (error) {

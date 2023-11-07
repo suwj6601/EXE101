@@ -72,6 +72,7 @@ const DemoPage = () => {
     }
   };
 
+  const finalPercent = randomNumber(98, 99);
   useEffect(() => {
     const maxIncrement = 7; // Maximum increment
     const minIncrement = 1; // Minimum increment
@@ -91,7 +92,7 @@ const DemoPage = () => {
           setPercent((prevPercent) => {
             const newPercent = prevPercent + 100 / increments + randomIncrement;
             currentIncrement++;
-            return newPercent <= 100 ? Math.round(newPercent) : 100; // Ensure it doesn't exceed 100%
+            return newPercent <= 100 ? Math.round(newPercent) : finalPercent; // Ensure it doesn't exceed 100%
           });
         } else {
           setIsAnimating(false);

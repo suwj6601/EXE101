@@ -78,7 +78,7 @@
   "build": {
     "asar": false,
     "asarUnpack": ".cache/puppeteer/chrome/**/*",
-    "productName": "CryptoTool",
+    "productName": "VirtualFit",
     "files": [
       "build/**/*",
       "dist/**/*",

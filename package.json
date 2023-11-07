@@ -35,7 +35,7 @@
     "dev": "concurrently -k \"cross-env BROWSER=none npm run start-web\" \"npm run start:electron\"",
     "build-web": "cross-env NODE_ENV=production craco build",
     "build-electron": "rm -rf dist && tsc -p src/electron/tsconfig.json",
-    "build": "npm run build-web && npm run build-electron",
+    "build": "npm run build-web ",
     "post-build": "cp -R .cache/puppeteer/chrome assets/chromium",
     "package": "electron-builder build --mac --x64 -c.extraMetadata.main=dist/electron/main.js --publish never",
     "release": "rm -rf release && npm run build && npm run package"
